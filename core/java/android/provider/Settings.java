@@ -7158,6 +7158,13 @@ public final class Settings {
          */
         public static final String ONE_HANDED_MODE_UI = "one_handed_mode_ui";
 
+	/**
+         * Disable expanding quick settings on secure lock screens
+         *
+         * @hide
+         */
+        public static final String LOCK_ENABLE_QS = "lockscreen_enable_qs";
+
         /**
          * This are the settings to be backed up.
          *
