@@ -3695,8 +3695,6 @@ public final class Settings {
          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
-<<<<<<< HEAD
-=======
          * Whether to prevent loud volume levels when headset is first plugged in.
          * @hide
          */
@@ -3823,7 +3821,6 @@ public final class Settings {
         public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
 
         /**
->>>>>>> 7be0526... Fw_base - AOKP custom system animations (1/2)
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
