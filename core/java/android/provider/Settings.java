@@ -3772,7 +3772,6 @@ public final class Settings {
                 "task_open_behind",
         };
         public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
-        public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
 
          /**
          * Three Finger Gesture
