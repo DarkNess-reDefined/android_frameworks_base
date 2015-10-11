@@ -217,7 +217,7 @@ public final class ShutdownThread extends Thread {
                                     ? com.android.internal.R.string.reboot_title
                                     : com.android.internal.R.string.power_off);
 
-            if (!advancedReboot || mRebootSafeMode) {
+            if (!advancedReboot || !mReboot || mRebootSafeMode) {
                 confirmDialogBuilder.setMessage(resourceId);
             } else {
                 confirmDialogBuilder
