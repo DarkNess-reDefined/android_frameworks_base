@@ -106,4 +106,7 @@
 
   <java-symbol type="layout" name="single_hand_window" />
 
+   <!-- Screen record -->
+  <java-symbol type="bool" name="config_enableScreenrecordChord" />
+
 </resources>
