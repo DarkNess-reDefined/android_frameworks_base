@@ -34,4 +34,7 @@
     <!-- One Hand Mode -->
     <bool name="single_hand_mode">true</bool>
 
+    <!-- Screen record -->
+    <bool name="config_enableScreenrecordChord">true</bool>
+
 </resources>
