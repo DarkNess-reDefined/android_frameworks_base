@@ -3763,6 +3763,13 @@ public final class Settings {
         public static final String ANIMATION_CONTROLS_DURATION = "animation_controls_duration";
         public static final String ANIMATION_CONTROLS_NO_OVERRIDE = "animation_controls_no_override";
 
+         /**
+         * Three Finger Gesture
+         *
+         * @hide
+         */
+        public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
+
 	 /**
          * Whether to display set of animations when prompting the power menu
          *
