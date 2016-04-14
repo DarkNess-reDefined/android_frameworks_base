@@ -22,4 +22,6 @@
     <color name="status_bar_temperature_text_color">#FFFFFFFF</color>
     <color name="status_bar_temperature_location_text_color">#FFFFFFFF</color>
 
+    <!-- Navigation button ripple color -->
+    <color name="navbutton_ripple_color">#FFFFFFFF</color>
 </resources>
