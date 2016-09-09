@@ -3998,6 +3998,16 @@ public final class Settings {
          */
         public static final String DOZE_SCREEN_BRIGHTNESS = "doze_screen_brightness";
 
+       /**
+         * Immersive recents options
+         *
+         * 0 = Default AOSP look
+         * 1 = Statusbar only
+         * 2 = Navbar only
+         * 3 = Fullscreen
+         */
+        public static final String IMMERSIVE_RECENTS = "immersive_recents";
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
