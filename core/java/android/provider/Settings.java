@@ -3806,6 +3806,12 @@ public final class Settings {
         public static final String STATUSBAR_CLOCK_DATE_POSITION = "statusbar_clock_date_position";
 
         /**
+          * Whether to use one tap tile action to enable or disable data 
+          * @hide
+          */
+        public static final String QS_DATA_ADVANCED = "qs_data_advanced";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
