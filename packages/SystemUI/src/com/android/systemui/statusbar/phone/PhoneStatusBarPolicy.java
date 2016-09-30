@@ -91,7 +91,8 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
     private final DataSaverController mDataSaver;
     private StatusBarKeyguardViewManager mStatusBarKeyguardViewManager;
     private final SuController mSuController;
-    private boolean mShowBluetoothBattery;
+    private boolean mShowBluetoothBattery; =======
+    private boolean mSuIndicatorVisible;
 
     // Assume it's all good unless we hear otherwise.  We don't always seem
     // to get broadcasts that it *is* there.
@@ -141,6 +142,7 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
         mSlotDataSaver = context.getString(com.android.internal.R.string.status_bar_data_saver);
         mSlotSu = context.getString(com.android.internal.R.string.status_bar_su);
         mRotationLockController.addRotationLockControllerCallback(this);
+        mSettingsObserver.onChange(true);
 
         // listen for broadcasts
         IntentFilter filter = new IntentFilter();
@@ -205,6 +207,9 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
         mHotspot.addCallback(mHotspotCallback);
 
         // su
+        mContext.getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.SHOW_SU_INDICATOR),
+                false, mSettingsObserver);
         mIconController.setIcon(mSlotSu, R.drawable.stat_sys_su, null);
         mIconController.setIconVisibility(mSlotSu, false);
         mSuController.addCallback(mSuCallback);
@@ -227,6 +232,13 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
             mShowBluetoothBattery = Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.BLUETOOTH_SHOW_BATTERY, 0) == 1;
             updateBluetooth();
+
+    private ContentObserver mSettingsObserver = new ContentObserver(null) {
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            mSuIndicatorVisible = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SHOW_SU_INDICATOR, 0) == 1;
+            updateSu();
         }
 
         @Override
@@ -552,7 +564,7 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
     };
 
     private void updateSu() {
-        mIconController.setIconVisibility(mSlotSu, mSuController.hasActiveSessions());
+        mIconController.setIconVisibility(mSlotSu, mSuController.hasActiveSessions() && mSuIndicatorVisible);
     }
 
     private final CastController.Callback mCastCallback = new CastController.Callback() {
