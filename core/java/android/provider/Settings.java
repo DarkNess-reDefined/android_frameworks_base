@@ -3842,6 +3842,12 @@ public final class Settings {
         public static final String SCREENSHOT_TYPE = "screenshot_type";
 
         /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         * @hide
+         */
+        public static final String FINGERPRINT_SUCCESS_VIB = "fingerprint_success_vib";
+
+        /**
          * @hide
          */
         public static final String SHOW_SU_INDICATOR = "show_su_indicator";
