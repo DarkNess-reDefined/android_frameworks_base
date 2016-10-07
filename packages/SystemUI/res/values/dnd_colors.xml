@@ -31,6 +31,9 @@
 
     <!-- QS edit button text color -->
     <color name="qs_edit_button_text_color">#64FFFFFF</color>
+    <color name="qs_battery_text_color">@*android:color/accent_device_default_light</color>
+    <color name="qs_battery_graph_text_color">#66FFFFFF</color>
+    <color name="qs_battery_accent">@*android:color/accent_device_default_light</color>
 
     <!-- Custom Navbar Color -->
     <color name="icon_color_back">@android:color/white</color>
