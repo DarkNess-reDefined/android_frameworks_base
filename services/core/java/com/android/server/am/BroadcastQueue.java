@@ -1457,6 +1457,14 @@ public final class BroadcastQueue {
             }
         }
 
+        if(mPendingBroadcast != null){
+            didSomething |= mPendingBroadcast.cleanupDisabledPackageReceiversLocked(
+                    packageName, filterByClasses, userId, doit);
+            if (!doit && didSomething) {
+                return true;
+            }
+        }
+
         return didSomething;
     }
 
