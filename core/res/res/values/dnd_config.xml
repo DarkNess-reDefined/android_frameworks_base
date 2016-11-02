@@ -24,4 +24,12 @@
     <!-- Quick settings tiles columns and rows config -->
     <integer name="config_qs_num_rows_landscape_default">2</integer>
 
+    <!-- Custom Navbar Color -->
+    <color name="icon_color_back">@android:color/white</color>
+    <color name="icon_color_ime_switcher">@android:color/white</color>
+    <color name="icon_color_split_screen">@android:color/white</color>
+    <color name="icon_color_home">@android:color/white</color>
+    <color name="icon_color_overview">@android:color/white</color>
+
+
 </resources>
