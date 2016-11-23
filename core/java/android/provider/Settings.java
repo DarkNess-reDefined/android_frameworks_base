@@ -7084,6 +7084,12 @@ public final class Settings {
         public static final String ONE_HANDED_MODE_UI = "one_handed_mode_ui";
 
         /**
+         * Whether to sync the battery tile stile with the statusbar battery icon style
+         * @hide
+         */
+        public static final String STATUS_BAR_BATTERY_STYLE_TILE = "status_bar_battery_style_tile";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
