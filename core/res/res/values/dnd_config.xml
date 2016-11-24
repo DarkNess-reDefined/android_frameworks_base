@@ -31,5 +31,7 @@
     <color name="icon_color_home">@android:color/white</color>
     <color name="icon_color_overview">@android:color/white</color>
 
+    <!-- One Hand Mode -->
+    <bool name="single_hand_mode">true</bool>
 
 </resources>
