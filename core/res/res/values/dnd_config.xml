@@ -21,5 +21,7 @@
 
     <!-- Screen record -->
     <bool name="config_enableScreenrecordChord">true</bool>
+    <!-- Whether doze feature is enabled by default in settings. -->
+    <bool name="config_doze_enabled_by_default">false</bool>
 
 </resources>
