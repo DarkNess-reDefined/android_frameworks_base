@@ -333,6 +333,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             Settings.Secure.QS_COLUMNS;
     private static final String STATUS_BAR_SHOW_CARRIER =
             "system:" + Settings.System.STATUS_BAR_SHOW_CARRIER;
+    private static final String NAV_BAR_DYNAMIC =
+            "system:" + Settings.System.NAV_BAR_DYNAMIC;
 
     static {
         boolean onlyCoreApps;
@@ -811,7 +813,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 QS_ROWS_PORTRAIT,
                 QS_ROWS_LANDSCAPE,
                 QS_COLUMNS,
-                STATUS_BAR_SHOW_CARRIER);
+                STATUS_BAR_SHOW_CARRIER,
+                NAV_BAR_DYNAMIC);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
@@ -5540,6 +5543,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mShowCarrierLabel =
                         newValue == null ? 1 : Integer.parseInt(newValue);
                 updateCarrier();
+                break;
+            case NAV_BAR_DYNAMIC:
+                if (mNavigationController != null) {
+                    mNavigationController.updateNavbarOverlay(mContext.getResources());
+                }
                 break;
             default:
                 break;
