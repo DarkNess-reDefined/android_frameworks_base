@@ -335,6 +335,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             "system:" + Settings.System.STATUS_BAR_SHOW_CARRIER;
     private static final String NAV_BAR_DYNAMIC =
             "system:" + Settings.System.NAV_BAR_DYNAMIC;
+    private static final String NAVBAR_TINT_SWITCH =
+            "system:" + Settings.System.NAVBAR_TINT_SWITCH;
+    private static final String NAVBAR_BUTTON_COLOR =
+            "system:" + Settings.System.NAVBAR_BUTTON_COLOR;
 
     static {
         boolean onlyCoreApps;
@@ -814,7 +818,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 QS_ROWS_LANDSCAPE,
                 QS_COLUMNS,
                 STATUS_BAR_SHOW_CARRIER,
-                NAV_BAR_DYNAMIC);
+                NAV_BAR_DYNAMIC,
+                NAVBAR_TINT_SWITCH,
+                NAVBAR_BUTTON_COLOR);
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
@@ -5545,6 +5551,16 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 updateCarrier();
                 break;
             case NAV_BAR_DYNAMIC:
+                if (mNavigationController != null) {
+                    mNavigationController.updateNavbarOverlay(mContext.getResources());
+                }
+                break;
+            case NAVBAR_TINT_SWITCH:
+                if (mNavigationController != null) {
+                    mNavigationController.updateNavbarOverlay(mContext.getResources());
+                }
+                break;
+            case NAVBAR_BUTTON_COLOR:
                 if (mNavigationController != null) {
                     mNavigationController.updateNavbarOverlay(mContext.getResources());
                 }
