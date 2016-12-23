@@ -7021,6 +7021,13 @@ public final class Settings {
         public static final String FORCE_AUTHORIZE_SUBSTRATUM_PACKAGES = "force_authorize_substratum_packages";
 
         /**
+         * Enable single click to turn Battery Saver on or off.
+         * @hide
+         */
+        public static final String QS_BATTERY_EASY_TOGGLE = "qs_battery_easy_toggle";
+
+
+        /**
          * Number of rows used for the Quick Settings (portrait)
          *
          * @hide

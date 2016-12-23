@@ -44,7 +44,9 @@ import com.android.systemui.R;
 import com.android.systemui.qs.QSIconView;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.statusbar.policy.BatteryController;
+
 import cyanogenmod.providers.CMSettings;
+
 import java.text.NumberFormat;
 
 public class BatteryTile extends QSTile<QSTile.State> implements BatteryController.BatteryStateChangeCallback {
@@ -60,7 +62,6 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
     private int mBatteryStyle;
     private int mBatteryStyleTile;
 
-
     public BatteryTile(Host host) {
         super(host);
         mBatteryController = host.getBatteryController();
@@ -68,12 +69,11 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
                 CMSettings.System.STATUS_BAR_BATTERY_STYLE, BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT);
         mBatteryStyleTile = Settings.Secure.getInt(host.getContext().getContentResolver(),
                 Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, 1);
-        if (mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_HIDDEN ||
+        if (mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_HIDDEN || 
                 mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_TEXT || mBatteryStyleTile == 0) {
             mBatteryStyle = BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT;
         }
     }
-
 
     @Override
     public QSIconView createTileView(Context context) {
@@ -116,6 +116,21 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
         }
     }
 
+    public boolean isSaverEasyToggleEnabled() {
+        return Settings.Secure.getInt(mContext.getContentResolver(),
+            Settings.Secure.QS_BATTERY_EASY_TOGGLE, 0) == 1;
+    }
+
+    @Override
+    protected void handleLongClick() {
+        boolean easyToggle = isSaverEasyToggleEnabled();
+        if (easyToggle) {
+            showDetail(true);
+        } else {
+            mHost.startActivityDismissingKeyguard(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY));
+        }
+    }
+
     @Override
     public Intent getLongClickIntent() {
         return new Intent(Intent.ACTION_POWER_USAGE_SUMMARY);
@@ -123,7 +138,12 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
 
     @Override
     protected void handleClick() {
-        showDetail(true);
+    boolean batteryeasy = isSaverEasyToggleEnabled();
+        if (!batteryeasy) {
+            showDetail(true);
+        } else {
+            mBatteryController.setPowerSaveMode(!mPowerSave);
+        }
     }
 
     @Override
@@ -139,7 +159,7 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
         state.icon = new Icon() {
             @Override
             public Drawable getDrawable(Context context) {
-                mBatteryStyle = Settings.Secure.getInt(context.getContentResolver(),
+                mBatteryStyle = CMSettings.System.getInt(context.getContentResolver(),
                         CMSettings.System.STATUS_BAR_BATTERY_STYLE, BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT);
                 mBatteryStyleTile = Settings.Secure.getInt(context.getContentResolver(),
                         Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, 1);
