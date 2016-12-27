@@ -22,6 +22,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.Settings;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -43,9 +44,7 @@ import com.android.systemui.R;
 import com.android.systemui.qs.QSIconView;
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.statusbar.policy.BatteryController;
-
 import cyanogenmod.providers.CMSettings;
-
 import java.text.NumberFormat;
 
 public class BatteryTile extends QSTile<QSTile.State> implements BatteryController.BatteryStateChangeCallback {
@@ -61,6 +60,7 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
     private int mBatteryStyle;
     private int mBatteryStyleTile;
 
+
     public BatteryTile(Host host) {
         super(host);
         mBatteryController = host.getBatteryController();
@@ -68,11 +68,12 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
                 CMSettings.System.STATUS_BAR_BATTERY_STYLE, BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT);
         mBatteryStyleTile = Settings.Secure.getInt(host.getContext().getContentResolver(),
                 Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, 1);
-        if (mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_HIDDEN || 
+        if (mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_HIDDEN ||
                 mBatteryStyle == BatteryMeterDrawable.BATTERY_STYLE_TEXT || mBatteryStyleTile == 0) {
             mBatteryStyle = BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT;
         }
     }
+
 
     @Override
     public QSIconView createTileView(Context context) {
@@ -138,7 +139,7 @@ public class BatteryTile extends QSTile<QSTile.State> implements BatteryControll
         state.icon = new Icon() {
             @Override
             public Drawable getDrawable(Context context) {
-                mBatteryStyle = CMSettings.System.getInt(context.getContentResolver(),
+                mBatteryStyle = Settings.Secure.getInt(context.getContentResolver(),
                         CMSettings.System.STATUS_BAR_BATTERY_STYLE, BatteryMeterDrawable.BATTERY_STYLE_PORTRAIT);
                 mBatteryStyleTile = Settings.Secure.getInt(context.getContentResolver(),
                         Settings.Secure.STATUS_BAR_BATTERY_STYLE_TILE, 1);
