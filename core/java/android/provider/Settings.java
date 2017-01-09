@@ -3695,7 +3695,6 @@ public final class Settings {
          public static final String VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
 
         /**
-<<<<<<< HEAD
          * Whether to prevent loud volume levels when headset is first plugged in.
          * @hide
          */
@@ -3818,6 +3817,12 @@ public final class Settings {
          * @hide
          */
         public static final String LISTVIEW_INTERPOLATOR = "listview_interpolator";
+
+        /**
+         * Remove tile summaries in settings
+         * @hide
+         */
+        public static final String REMOVE_TILE_SUMMARY = "remove_tile_summary";
 
         /**
          * Disabled Transition animations of the android system
