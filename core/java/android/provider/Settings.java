@@ -3801,12 +3801,6 @@ public final class Settings {
         public static final String LISTVIEW_INTERPOLATOR = "listview_interpolator";
 
         /**
-         * Remove tile summaries in settings
-         * @hide
-         */
-        public static final String REMOVE_TILE_SUMMARY = "remove_tile_summary";
-
-        /**
          * Disabled Transition animations of the android system
          * @hide
          */
