@@ -23,6 +23,7 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
 import android.os.UserHandle;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -56,6 +57,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
     protected final Context mContext;
     protected final ArrayList<TileRecord> mRecords = new ArrayList<TileRecord>();
     protected final View mBrightnessView;
+    protected final ImageView mBrightnessIcon;
     private final H mHandler = new H();
 
     private int mPanelPaddingBottom;
@@ -77,6 +79,8 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
 
     private BrightnessMirrorController mBrightnessMirrorController;
 
+    protected Vibrator mVibrator;
+
     public QSPanel(Context context) {
         this(context, null);
     }
@@ -91,15 +95,18 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
                 R.layout.quick_settings_brightness_dialog, this, false);
         addView(mBrightnessView);
 
+        mBrightnessIcon = (ImageView) mBrightnessView.findViewById(R.id.brightness_icon);
+
         setupTileLayout();
 
         mFooter = new QSFooter(this, context);
         addView(mFooter.getView());
 
+        mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         updateResources();
 
         mBrightnessController = new BrightnessController(getContext(),
-                (ImageView) findViewById(R.id.brightness_icon),
+                mBrightnessIcon,
                 (ToggleSlider) findViewById(R.id.brightness_slider));
 
     }
@@ -159,6 +166,14 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
             }
         }
         return mHost.createTile(subPanel);
+    }
+
+    private void setBrightnessIcon() {
+        boolean brightnessIconEnabled = Settings.System.getIntForUser(
+            mContext.getContentResolver(), Settings.System.QS_SHOW_BRIGHTNESS_ICON,
+                0, UserHandle.USER_CURRENT) == 1;
+        mBrightnessIcon.setVisibility(brightnessIconEnabled ? View.VISIBLE : View.GONE);
+        updateResources();
     }
 
     public void setBrightnessMirror(BrightnessMirrorController c) {
@@ -257,6 +272,7 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
                 mBrightnessController.unregisterCallbacks();
             }
         }
+        setBrightnessIcon();
     }
 
     public void refreshAllTiles() {
@@ -358,12 +374,14 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
             @Override
             public void onClick(View v) {
                 onTileClick(r.tile);
+                vibrateTile(20);
             }
         };
         final View.OnLongClickListener longClick = new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 r.tile.longClick();
+                vibrateTile(20);
                 return true;
             }
         };
@@ -552,5 +570,17 @@ public class QSPanel extends LinearLayout implements Tunable, Callback {
         boolean updateResources();
 
         void setListening(boolean listening);
+    }
+
+    public boolean isVibrationEnabled() {
+        return (Settings.System.getIntForUser(mContext.getContentResolver(),
+                Settings.System.QUICK_SETTINGS_TILES_VIBRATE, 0, UserHandle.USER_CURRENT) == 1);
+    }
+
+    public void vibrateTile(int duration) {
+        if (!isVibrationEnabled()) { return; }
+        if (mVibrator != null) {
+            if (mVibrator.hasVibrator()) { mVibrator.vibrate(duration); }
+        }
     }
 }
