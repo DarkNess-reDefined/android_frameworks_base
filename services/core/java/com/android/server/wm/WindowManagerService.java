@@ -10460,13 +10460,13 @@ public class WindowManagerService extends IWindowManager.Stub
     }
 
     @Override
-    public boolean hasNavigationBar() {
-        return mPolicy.hasNavigationBar();
-    }
-
-    @Override 
     public boolean needsNavigationBar() {
         return mPolicy.needsNavigationBar();
+    }
+
+    @Override
+    public boolean hasNavigationBar() {
+        return mPolicy.hasNavigationBar();
     }
 
     @Override
