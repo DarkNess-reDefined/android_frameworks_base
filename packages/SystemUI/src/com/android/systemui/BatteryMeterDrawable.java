@@ -68,6 +68,7 @@ public class BatteryMeterDrawable extends Drawable implements
 
     // Values for the different battery styles
     public static final int BATTERY_STYLE_PORTRAIT  = 0;
+    public static final int BATTERY_STYLE_SOLID     = 1;
     public static final int BATTERY_STYLE_CIRCLE    = 2;
     public static final int BATTERY_STYLE_HIDDEN    = 4;
     public static final int BATTERY_STYLE_LANDSCAPE = 5;
@@ -491,6 +492,8 @@ public class BatteryMeterDrawable extends Drawable implements
         switch (style) {
             case BATTERY_STYLE_LANDSCAPE:
                 return R.drawable.ic_battery_landscape;
+           case BATTERY_STYLE_SOLID:
+                return R.drawable.ic_battery_solid;
             case BATTERY_STYLE_CIRCLE:
                 return R.drawable.ic_battery_circle;
             case BATTERY_STYLE_PORTRAIT:
@@ -504,6 +507,8 @@ public class BatteryMeterDrawable extends Drawable implements
         switch (style) {
             case BATTERY_STYLE_LANDSCAPE:
                 return R.style.BatteryMeterViewDrawable_Landscape;
+            case BATTERY_STYLE_SOLID:
+                return R.style.BatteryMeterViewDrawable_Solid;
             case BATTERY_STYLE_CIRCLE:
                 return R.style.BatteryMeterViewDrawable_Circle;
             case BATTERY_STYLE_PORTRAIT:
