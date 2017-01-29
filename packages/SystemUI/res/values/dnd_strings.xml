@@ -22,4 +22,54 @@
     <string name="battery_solid_full" translatable="false">M 12 2 C 17.5228474983 2 22 6.47715250169 22 12 C 22 17.5228474983 17.5228474983 22 12 22 C 6.47715250169 22 2 17.5228474983 2 12 C 2 6.47715250169 6.47715250169 2 12 2 Z</string>
     <string name="battery_solid_empty" translatable="false">M 12 12 C 12 12 12 12 12 12 C 12 12 12 12 12 12 C 12 12 12 12 12 12 C 12 12 12 12 12 12 Z</string>
 
+    <!-- Quick Settings tiles -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
+    <string name="quick_settings_adb_network">ADB network</string>
+    <string name="quick_settings_network_adb_enabled_label">Enabled</string>
+    <string name="quick_settings_network_adb_disabled_label">Disabled</string>
+    <string name="quick_settings_sync_label">Sync</string>
+    <string name="accessibility_quick_settings_sync_off">Sync off</string>
+    <string name="accessibility_quick_settings_sync_on">Sync on</string>
+    <string name="accessibility_quick_settings_sync_changed_off">Sync turned off</string>
+    <string name="accessibility_quick_settings_sync_changed_on">Sync turned on</string>
+    <string name="quick_settings_expanded_desktop_label">Expanded desktop</string>
+    <string name="quick_settings_expanded_desktop">Expanded</string>
+    <string name="quick_settings_expanded_desktop_off">Normal</string>
+    <string name="accessibility_quick_settings_usb_tether_off">USB tethering off</string>
+    <string name="accessibility_quick_settings_usb_tether_on">USB tethering on</string>
+    <string name="accessibility_quick_settings_usb_tether_changed_off">USB tethering turned off</string>
+    <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on</string>
+    <string name="quick_settings_usb_tether_label">USB tethering</string>
+    <string name="quick_settings_music_label">Music</string>
+    <string name="quick_settings_music_play">Play</string>
+    <string name="quick_settings_music_pause">Pause</string>
+    <string name="quick_settings_ime_tile_label">Input method</string>
+    <string name="quick_settings_caffeine_label">Caffeine</string>
+    <string name="accessibility_quick_settings_caffeine_off">Caffeine off</string>
+    <string name="accessibility_quick_settings_caffeine_on">Caffeine on</string>
+    <string name="quick_settings_nfc_label">NFC</string>
+    <string name="accessibility_quick_settings_nfc_off">NFC off.</string>
+    <string name="accessibility_quick_settings_nfc_on">NFC on.</string>
+    <string name="accessibility_quick_settings_nfc_changed_off">NFC turned off.</string>
+    <string name="accessibility_quick_settings_nfc_changed_on">NFC turned on.</string>
+    <string name="quick_settings_heads_up_label">Heads up</string>
+    <string name="accessibility_quick_settings_heads_up_off">Heads up off.</string>
+    <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
+    <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
+    <string name="quick_settings_pulse_enabled">Pulse Enabled</string>
+    <string name="quick_settings_pulse_disabled">No Visualizer</string>
+    <string name="quick_settings_pulse_label">Navigationbar Visualizer</string>
+
+    <!-- Reboot/Recovery QS Tile -->
+    <string name="quick_settings_reboot_label">Reboot</string>
+    <string name="quick_settings_reboot_recovery_label">Recovery</string>
+
+    <!-- Navigation bar Tile -->
+    <string name="quick_settings_navigation_bar">Navigation bar</string>
+    <string name="quick_settings_smartbar">SmartBar</string>
+    <string name="quick_settings_smartbar_off">SmartBar off</string>
+    <string name="quick_settings_fling">Fling</string>
+    <string name="quick_settings_fling_off">Fling off</string>
+
 </resources>
