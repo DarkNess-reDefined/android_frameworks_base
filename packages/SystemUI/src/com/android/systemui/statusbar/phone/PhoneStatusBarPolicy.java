@@ -181,7 +181,6 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
         mSlotDataSaver = context.getString(com.android.internal.R.string.status_bar_data_saver);
         mSlotSu = context.getString(com.android.internal.R.string.status_bar_su);
         mRotationLockController.addRotationLockControllerCallback(this);
-        mSettingsObserver.onChange(true);
 
         // listen for broadcasts
         IntentFilter filter = new IntentFilter();
@@ -246,12 +245,14 @@ public class PhoneStatusBarPolicy implements Callback, RotationLockController.Ro
         mHotspot.addCallback(mHotspotCallback);
 
         // su
-        mContext.getContentResolver().registerContentObserver(
-                Settings.System.getUriFor(Settings.System.SHOW_SU_INDICATOR),
-                false, mSettingsObserver);
         mIconController.setIcon(mSlotSu, R.drawable.stat_sys_su, null);
         mIconController.setIconVisibility(mSlotSu, false);
         mSuController.addCallback(mSuCallback);
+        mSettingsObserver.onChange(true);
+        mContext.getContentResolver().registerContentObserver(
+                Settings.System.getUriFor(Settings.System.SHOW_SU_INDICATOR),
+                false, mSettingsObserver);
+            updateSu();
 
         // managed profile
         mIconController.setIcon(mSlotManagedProfile, R.drawable.stat_sys_managed_profile_status,

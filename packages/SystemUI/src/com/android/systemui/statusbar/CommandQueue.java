@@ -136,8 +136,6 @@ public class CommandQueue extends IStatusBar.Stub {
 
         void handleSystemNavigationKey(int arg1);
         void screenPinningStateChanged(boolean enabled);
-        public void toggleOrientationListener(boolean enable);
-
         void restartUI();
     }
 

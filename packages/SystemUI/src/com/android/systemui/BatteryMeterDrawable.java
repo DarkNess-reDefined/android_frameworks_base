@@ -268,7 +268,8 @@ public class BatteryMeterDrawable extends Drawable implements
         mLevel = level;
         mPluggedIn = pluggedIn;
 
-        if (mStyle == BATTERY_STYLE_CIRCLE) {
+        if (CMSettings.System.getInt(mContext.getContentResolver(),
+                CMSettings.System.STATUS_BAR_BATTERY_STYLE, 0) == 2) {
             animateCircleBattery(level, pluggedIn, charging);
         }
 
