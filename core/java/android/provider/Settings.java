@@ -3906,17 +3906,12 @@ public final class Settings {
          * @hide
          */
         public static final String QUICK_SETTINGS_TILES_VIBRATE = "quick_settings_vibrate";
+
         /**
          * Enable/Disable screenshot sound
          * @hide
          */
         public static final String SCREENSHOT_SOUND = "screenshot_sound";
-
-        /**
-         * Whether to allow fullscreen screenshots or let the user select which area to screenshot
-         *
-         */
-        public static final String SCREENSHOT_TYPE = "screenshot_type";
 
         /**
          * whether to enable or disable vibration on succesful fingerprint auth
@@ -3928,6 +3923,12 @@ public final class Settings {
          * @hide
          */
         public static final String SHOW_SU_INDICATOR = "show_su_indicator";
+
+        /**
+         * Whether to allow screen record chord to take selectable screenshots
+         * @hide
+         */
+        public static final String SCREENRECORD_CHORD_TYPE = "screenrecord_chord_type";
 
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
