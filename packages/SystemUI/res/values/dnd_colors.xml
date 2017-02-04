@@ -43,4 +43,7 @@
     <color name="icon_color_overview">@android:color/white</color>
     <color name="system_primary_color">#ff263238</color><!--blue grey 900 -->
 
+    <!-- External QS tile tint color -->
+    <color name="external_qs_tile_tint_color">@android:color/white</color>
+
 </resources>
