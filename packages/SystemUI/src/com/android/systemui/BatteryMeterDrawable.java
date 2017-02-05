@@ -279,8 +279,7 @@ public class BatteryMeterDrawable extends Drawable implements
         mLevel = level;
         mPluggedIn = pluggedIn;
 
-        if (CMSettings.System.getInt(mContext.getContentResolver(),
-                CMSettings.System.STATUS_BAR_BATTERY_STYLE, 0) == 2) {
+        if (mStyle == BATTERY_STYLE_CIRCLE) {
             animateCircleBattery(level, pluggedIn, charging);
         }
 
@@ -417,12 +416,13 @@ public class BatteryMeterDrawable extends Drawable implements
         mCurrentBackgroundColor = getBackgroundColor(darkIntensity);
         mCurrentFillColor = getFillColor(darkIntensity);
         mIconTint = mCurrentFillColor;
+        mFrameDrawable.setTint(mCurrentBackgroundColor);
         // Make bolt fully opaque for increased visibility
         if (mBoltDrawable != null) {
             mBoltDrawable.setTint(0xff000000 | mCurrentFillColor);
             updateBoltDrawableLayer(mBatteryDrawable, mBoltDrawable);
         }
-         invalidateSelf();
+        invalidateSelf();
         mOldDarkIntensity = darkIntensity;
     }
 
@@ -560,7 +560,7 @@ public class BatteryMeterDrawable extends Drawable implements
         switch (style) {
             case BATTERY_STYLE_LANDSCAPE:
                 return R.drawable.ic_battery_landscape;
-           case BATTERY_STYLE_SOLID:
+            case BATTERY_STYLE_SOLID:
                 return R.drawable.ic_battery_solid;
             case BATTERY_STYLE_CIRCLE:
                 return R.drawable.ic_battery_circle;
@@ -588,7 +588,7 @@ public class BatteryMeterDrawable extends Drawable implements
 
     private int getBoltColor() {
         if (mBoltOverlay) {
-           return mContext.getResources().getColor((mStyle == BATTERY_STYLE_SOLID ||
+            return mContext.getResources().getColor((mStyle == BATTERY_STYLE_SOLID ||
                 mStyle == BATTERY_STYLE_CIRCLE) ? R.color.batterymeter_bolt_color : R.color.system_primary_color);
         }
         return mContext.getResources().getColor(R.color.batterymeter_bolt_color);
@@ -719,7 +719,7 @@ public class BatteryMeterDrawable extends Drawable implements
                 }
             } else {
                 d.setAlpha(mPluggedIn ? 255 : 0);
-	  }
+            }
         }
 
         // Now draw the level indicator
