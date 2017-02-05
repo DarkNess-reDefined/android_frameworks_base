@@ -2216,6 +2216,9 @@ message MetricsEvent {
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 
+    // Redefinition Arena
+    REDEFINITION = 500;
+
     // Quick setting tiles
     QUICK_SETTINGS = 412;
   }
