@@ -88,4 +88,7 @@
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
 
+    <!-- volte icon switch -->
+    <string name="status_bar_volte">VoLTE</string>
+
 </resources>
