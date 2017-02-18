@@ -2219,18 +2219,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
-    private void enableSwipeThreeFingerGesture(boolean enable){
-        if (enable) {
-            if (haveEnableGesture) return;
-            haveEnableGesture = true;
-            mWindowManagerFuncs.registerPointerEventListener(mOPGestures);
-        } else {
-	    if (!haveEnableGesture) return;
-            haveEnableGesture = false;
-            mWindowManagerFuncs.unregisterPointerEventListener(mOPGestures);
-        }
-    }
-
     private void updateKeyAssignments() {
         int activeHardwareKeys = mDeviceHardwareKeys;
 
@@ -9231,6 +9219,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
+
     private String getRearFlashCameraId() throws CameraAccessException {
         if (mRearFlashCameraId != null) return mRearFlashCameraId;
         for (final String id : mCameraManager.getCameraIdList()) {
@@ -9256,8 +9245,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
             if (!cameraId.equals(mRearFlashCameraId)) return;
             mTorchEnabled = false;
         }
+    }
+
     public void freezeOrThawRotation(int rotation) {
         mDesiredRotation = rotation;
     }
 }
-
