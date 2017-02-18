@@ -9374,6 +9374,7 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
+
     private String getRearFlashCameraId() throws CameraAccessException {
         if (mRearFlashCameraId != null) return mRearFlashCameraId;
         for (final String id : mCameraManager.getCameraIdList()) {
@@ -9412,4 +9413,3 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     isLeft ? "left" : "right" : "");
     }
 }
-
