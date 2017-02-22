@@ -7049,6 +7049,12 @@ public final class Settings {
         public static final String QS_COLUMNS = "qs_columns";
 
         /**
+         * Disable hw buttons - actions, brightness, haptic feedback, overflow menu
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
+
+        /**
          * Whether to sync the battery tile stile with the statusbar battery icon style
          * @hide
          */
