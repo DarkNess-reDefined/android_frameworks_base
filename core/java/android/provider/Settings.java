@@ -7086,6 +7086,12 @@ public final class Settings {
         public static final String ONE_HANDED_MODE_UI = "one_handed_mode_ui";
 
         /**
+         * Disable hw buttons - actions, brightness, haptic feedback, overflow menu
+         * @hide
+         */
+        public static final String HARDWARE_KEYS_DISABLE = "hardware_keys_disable";
+
+        /**
          * Whether to sync the battery tile stile with the statusbar battery icon style
          * @hide
          */
