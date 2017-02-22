@@ -10494,6 +10494,11 @@ public class WindowManagerService extends IWindowManager.Stub
         return mPolicy.hasNavigationBar();
     }
 
+     @Override
+    public boolean hasPermanentMenuKey() {
+        return mPolicy.hasPermanentMenuKey();
+    }
+
     @Override
     public void lockNow(Bundle options) {
         mPolicy.lockNow(options);
