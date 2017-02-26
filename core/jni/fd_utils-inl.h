@@ -306,7 +306,6 @@ class FileDescriptorInfo {
       return true;
     }
 
->>>>>>> 4518295... Merge tag 'android-7.1.1_r21' into cm-14.1
     return false;
   }
 
