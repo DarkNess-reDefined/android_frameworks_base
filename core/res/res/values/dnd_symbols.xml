@@ -78,6 +78,16 @@
   <java-symbol type="anim" name="slide_in_left_no_fade" />
   <java-symbol type="anim" name="slide_out_right_no_fade" />
 
+  <!-- Power menu animation  -->
+  <java-symbol type="style" name="PowerMenuBottomAnimation" />
+  <java-symbol type="style" name="PowerMenuTopAnimation" />
+  <java-symbol type="style" name="PowerMenuRotateAnimation" />
+  <java-symbol type="style" name="PowerMenuXylonAnimation" />
+  <java-symbol type="style" name="PowerMenuTranslucentAnimation" />
+  <java-symbol type="style" name="PowerMenuTnAnimation" />
+  <java-symbol type="style" name="PowerMenuflyAnimation" />
+  <java-symbol type="style" name="PowerMenuCardAnimation" />
+
   <!-- Doze invert -->
   <java-symbol type="bool" name="config_invert_colors_on_doze" />
 
