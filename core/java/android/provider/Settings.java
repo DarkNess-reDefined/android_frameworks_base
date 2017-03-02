@@ -3774,13 +3774,6 @@ public final class Settings {
          */
         public static final String THREE_FINGER_GESTURE = "three_finger_gesture";
 
-	 /**
-         * Whether to display set of animations when prompting the power menu
-         *
-         * @hide
-         */
-        public static final String POWER_MENU_ANIMATIONS = "power_menu_animations";
-
         /**
          * Enable\Disable Bluetooth Show Battery
          * @hide
