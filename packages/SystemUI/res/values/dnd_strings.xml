@@ -88,6 +88,10 @@
     <!-- Screen record notification error title -->
     <string name="screenrecord_notif_error">Unable to record screen</string>
 
+    <!-- Screenrecord QS tile -->
+    <string name="quick_settings_screenrecord">Screenrecord</string>
+    <string name="quick_settings_screenrecord_on">Recording ...</string>
+
     <!-- volte icon switch -->
     <string name="status_bar_volte">VoLTE</string>
 
