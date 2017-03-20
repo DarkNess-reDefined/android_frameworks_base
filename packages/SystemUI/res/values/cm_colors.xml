@@ -17,6 +17,7 @@
 <resources>
     <!-- Status bar battery level text color -->
     <color name="status_bar_battery_level_text_color">#ffffff</color>
+    <color name="batterymeter_frame_color_darkintensity">@color/dark_mode_icon_color_dual_tone_background</color>
 
     <!-- Expanded Status Bar Weather Text Colors -->
     <color name="status_bar_temperature_text_color">#FFFFFFFF</color>
