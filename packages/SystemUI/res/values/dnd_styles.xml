@@ -41,4 +41,7 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
+    <!-- Phyisical Keyboard Dialog style -->
+    <style name="KeyboardShortcutsDialog" parent="@*android:style/Theme.DeviceDefault.Light" />
+
 </resources>
