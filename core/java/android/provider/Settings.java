@@ -3715,6 +3715,12 @@ public final class Settings {
          */
         public static final String BLUETOOTH_SHOW_BATTERY = "bluetooth_show_battery";
 
+        /** 
+         * Remove tile summaries in settings 
+         * @hide 
+         */ 
+        public static final String REMOVE_TILE_SUMMARY = "remove_tile_summary"; 
+
         /**
         * List of Apps hidden from recents
         * @hide
