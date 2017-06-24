@@ -78,8 +78,6 @@ public class KeyguardIndicationController {
     private int mChargingWattage;
     private String mMessageToShowOnScreenOn;
 
-    boolean mShowBatteryInfo;
-
     public KeyguardIndicationController(Context context, KeyguardIndicationTextView textView,
                                         LockIcon lockIcon) {
         mContext = context;
@@ -161,9 +159,6 @@ public class KeyguardIndicationController {
 
     private void updateIndication() {
         if (mVisible) {
-           mShowBatteryInfo = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.LOCKSCREEN_BATTERY_INFO, 1, UserHandle.USER_CURRENT) == 1;
-
             // Walk down a precedence-ordered list of what should indication
             // should be shown based on user or device state
             if (!mUserManager.isUserUnlocked(ActivityManager.getCurrentUser())) {
@@ -174,7 +169,7 @@ public class KeyguardIndicationController {
                 mTextView.switchIndication(mTransientIndication);
                 mTextView.setTextColor(mTransientTextColor);
 
-            } else if (mPowerPluggedIn && mShowBatteryInfo) {
+            } else if (mPowerPluggedIn) {
                 String indication = computePowerIndication();
                 if (DEBUG_CHARGING_SPEED) {
                     indication += ",  " + (mChargingWattage / 1000) + " mW";
