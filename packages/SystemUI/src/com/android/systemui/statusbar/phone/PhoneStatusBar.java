@@ -325,20 +325,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             "system:" + Settings.System.SCREEN_BRIGHTNESS_MODE;
     private static final String STATUS_BAR_BRIGHTNESS_CONTROL =
             "cmsystem:" + CMSettings.System.STATUS_BAR_BRIGHTNESS_CONTROL;
-    private static final String QS_ROWS_PORTRAIT =
-            Settings.Secure.QS_ROWS_PORTRAIT;
-    private static final String QS_ROWS_LANDSCAPE =
-            Settings.Secure.QS_ROWS_LANDSCAPE;
-    private static final String QS_COLUMNS =
-            Settings.Secure.QS_COLUMNS;
-    private static final String STATUS_BAR_SHOW_CARRIER =
-            "system:" + Settings.System.STATUS_BAR_SHOW_CARRIER;
-    private static final String NAV_BAR_DYNAMIC =
-            "system:" + Settings.System.NAV_BAR_DYNAMIC;
-    private static final String NAVBAR_TINT_SWITCH =
-            "system:" + Settings.System.NAVBAR_TINT_SWITCH;
-    private static final String NAVBAR_BUTTON_COLOR =
-            "system:" + Settings.System.NAVBAR_BUTTON_COLOR;
 
     static {
         boolean onlyCoreApps;
@@ -519,6 +505,76 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
         }
     };
+
+    private SettingsObserver mSettingsObserver;
+
+    protected class SettingsObserver extends ContentObserver {
+        SettingsObserver(Handler handler) {
+            super(handler);
+        }
+
+        void observe() {
+           ContentResolver resolver = mContext.getContentResolver();
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAV_BAR_DYNAMIC),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.System.NAVBAR_TINT_SWITCH),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVBAR_BUTTON_COLOR),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.QS_COLUMNS),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                     Settings.Secure.QS_ROWS_PORTRAIT),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.Secure.getUriFor(
+                     Settings.Secure.QS_ROWS_LANDSCAPE),
+                    false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                     Settings.System.STATUS_BAR_SHOW_CARRIER),
+                   false, this, UserHandle.USER_ALL);
+            updateSettings();
+
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            super.onChange(selfChange, uri);
+             if (uri.equals(Settings.System.getUriFor(
+                      Settings.System.NAV_BAR_DYNAMIC))) {
+                      mNavigationController.updateNavbarOverlay(mContext.getResources());
+           } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVBAR_TINT_SWITCH))) {
+                    mNavigationController.updateNavbarOverlay(mContext.getResources());
+           } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.NAVBAR_BUTTON_COLOR))) {
+                    mNavigationController.updateNavbarOverlay(mContext.getResources());
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER))) {
+                    updateSettings();
+                    updateCarrier();
+            } else if (uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.QS_ROWS_PORTRAIT))
+                    || uri.equals(Settings.Secure.getUriFor(
+                    Settings.Secure.QS_ROWS_LANDSCAPE))) {
+                    updateResources();
+	    }
+            updateSettings();
+        }
+
+        public void updateSettings() {
+            ContentResolver resolver = mContext.getContentResolver();
+            mShowCarrierLabel = Settings.System.getIntForUser(resolver,
+                    Settings.System.STATUS_BAR_SHOW_CARRIER, 1, UserHandle.USER_CURRENT);
+
+            if (mHeader != null) {
+                mHeader.updateSettings();
+	    }
+        }
+    }
 
     Runnable mLongPressBrightnessChange = new Runnable() {
         @Override
@@ -813,14 +869,12 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         TunerService.get(mContext).addTunable(this,
                 SCREEN_BRIGHTNESS_MODE,
-                STATUS_BAR_BRIGHTNESS_CONTROL,
-                QS_ROWS_PORTRAIT,
-                QS_ROWS_LANDSCAPE,
-                QS_COLUMNS,
-                STATUS_BAR_SHOW_CARRIER,
-                NAV_BAR_DYNAMIC,
-                NAVBAR_TINT_SWITCH,
-                NAVBAR_BUTTON_COLOR);
+                STATUS_BAR_BRIGHTNESS_CONTROL);
+
+        if (mSettingsObserver == null) {
+            mSettingsObserver = new SettingsObserver(new Handler());
+        }
+        mSettingsObserver.observe();
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
@@ -1041,7 +1095,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         initSignalCluster(mKeyguardStatusBar);
         initEmergencyCryptkeeperText();
 
-        updateCarrier();
+        mCustomCarrierLabel = (TextView) mStatusBarWindow.findViewById(R.id.statusbar_carrier_text);
+        if (mCustomCarrierLabel != null) {
+            updateCarrier();
+        }
 
         mFlashlightController = new FlashlightController(mContext);
         mKeyguardBottomArea.setFlashlightController(mFlashlightController);
@@ -2138,6 +2195,18 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     public void requestNotificationUpdate() {
         updateNotifications();
+    }
+
+    private void updateCarrier() {
+        if (mCustomCarrierLabel != null) {
+            if (mShowCarrierLabel == 2) {
+                mCustomCarrierLabel.setVisibility(View.VISIBLE);
+            } else if (mShowCarrierLabel == 3) {
+                mCustomCarrierLabel.setVisibility(View.VISIBLE);
+            } else {
+                mCustomCarrierLabel.setVisibility(View.GONE);
+            }
+        }
     }
 
     @Override
@@ -5535,49 +5604,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             case STATUS_BAR_BRIGHTNESS_CONTROL:
                 mBrightnessControl = newValue != null && Integer.parseInt(newValue) == 1;
                 break;
-            case QS_ROWS_PORTRAIT:
-            case QS_ROWS_LANDSCAPE:
-                updateResources();
-                break;
-            case QS_COLUMNS:
-                if (mHeader != null) {
-                    mHeader.updateSettings();
-                }
-                updateResources();
-                break;
-            case STATUS_BAR_SHOW_CARRIER:
-                mShowCarrierLabel =
-                        newValue == null ? 1 : Integer.parseInt(newValue);
-                updateCarrier();
-                break;
-            case NAV_BAR_DYNAMIC:
-                if (mNavigationController != null) {
-                    mNavigationController.updateNavbarOverlay(mContext.getResources());
-                }
-                break;
-            case NAVBAR_TINT_SWITCH:
-                if (mNavigationController != null) {
-                    mNavigationController.updateNavbarOverlay(mContext.getResources());
-                }
-                break;
-            case NAVBAR_BUTTON_COLOR:
-                if (mNavigationController != null) {
-                    mNavigationController.updateNavbarOverlay(mContext.getResources());
-                }
-                break;
             default:
                 break;
-        }
-    }
-
-    private void updateCarrier() {
-        if (mStatusBarView == null) return;
-        mCustomCarrierLabel = (TextView) mStatusBarWindow.findViewById(R.id.statusbar_carrier_text);
-        if (mCustomCarrierLabel == null) return;
-        if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
-            mCustomCarrierLabel.setVisibility(View.VISIBLE);
-        } else {
-            mCustomCarrierLabel.setVisibility(View.GONE);
         }
     }
 
