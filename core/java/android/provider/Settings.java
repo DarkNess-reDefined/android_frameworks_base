@@ -4008,6 +4008,12 @@ public final class Settings {
          */
         public static final String IMMERSIVE_RECENTS = "immersive_recents";
 
+         /**
+         * show the membar in recents
+         *  @hide
+         */
+        public static final String SYSTEMUI_RECENTS_MEM_DISPLAY = "systemui_recents_mem_display";
+
         /**
          * show clear all recents button
          * @hide
