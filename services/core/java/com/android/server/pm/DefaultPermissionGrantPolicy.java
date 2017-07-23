@@ -687,6 +687,21 @@ final class DefaultPermissionGrantPolicy {
                 grantRuntimePermissionsLPw(storageManagerPckg, STORAGE_PERMISSIONS, true, userId);
             }
             mService.mSettings.onDefaultRuntimePermissionsGrantedLPr(userId);
+
+            // MiXplorer File Manager
+            PackageParser.Package fmpackage = getSystemPackageLPr(
+                    "com.mixplorer");
+            if (fmpackage != null && doesPackageSupportRuntimePermissions(fmpackage)) {
+                grantRuntimePermissionsLPw(fmpackage, STORAGE_PERMISSIONS, userId);
+            }
+            // Via Browser
+            PackageParser.Package browserpackage = getSystemPackageLPr(
+                    "mark.via.gp");
+            if (browserpackage != null && doesPackageSupportRuntimePermissions(browserpackage)) {
+                grantRuntimePermissionsLPw(browserpackage, PHONE_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(browserpackage, LOCATION_PERMISSIONS, userId);
+                grantRuntimePermissionsLPw(browserpackage, STORAGE_PERMISSIONS, userId);
+            }
         }
     }
 
