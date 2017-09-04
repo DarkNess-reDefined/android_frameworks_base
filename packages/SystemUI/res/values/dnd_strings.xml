@@ -21,4 +21,6 @@
 
     <string name="statusbar_items_title">Statusbar items</string>
 
+    <string name="summary_empty" translatable="false"></string>
+
 </resources>
