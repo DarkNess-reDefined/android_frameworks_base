@@ -578,8 +578,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 mHeader.updateSettings();
 	    }
             if (mBurnInProtectionController != null) {
-                mBurnInProtectionController.setNavigationBarView(
-                        visible ? mNavigationBarView : null);
+               // mBurnInProtectionController.setNavigationBarView(
+               //         visible ? mNavigationBarView : null);
             }
         }
     }
