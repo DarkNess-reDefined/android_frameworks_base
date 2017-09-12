@@ -115,6 +115,7 @@ import static android.view.WindowManagerPolicy.WindowManagerFuncs.LID_ABSENT;
 import static android.view.WindowManagerPolicy.WindowManagerFuncs.LID_CLOSED;
 import static android.view.WindowManagerPolicy.WindowManagerFuncs.LID_OPEN;
 
+import android.Manifest;
 import android.annotation.Nullable;
 import android.app.ActivityManager;
 import android.app.ActivityManager.StackId;
@@ -228,6 +229,7 @@ import android.view.inputmethod.InputMethodManagerInternal;
 import com.android.internal.R;
 import com.android.internal.logging.MetricsLogger;
 import com.android.internal.policy.IKeyguardDismissCallback;
+import com.android.internal.util.dnd.DNDUtils;
 import com.android.internal.policy.IShortcutService;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.statusbar.IStatusBarService;
@@ -8088,6 +8090,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
     @Override
     public boolean hasNavigationBar() {
         return mHasNavigationBar;
+    }
+
+    @Override
+    public void sendCustomAction(Intent intent) {
+        String action = intent.getAction();
+        if (action != null) {
+            if (DNDUtils.INTENT_SCREENSHOT.equals(action)) {
+                mContext.enforceCallingOrSelfPermission(Manifest.permission.ACCESS_SURFACE_FLINGER,
+                        TAG + "sendCustomAction permission denied");
+                mHandler.removeCallbacks(mScreenshotRunnable);
+                mScreenshotRunnable.setScreenshotType(TAKE_SCREENSHOT_FULLSCREEN);
+                mHandler.post(mScreenshotRunnable);
+            } else if (DNDUtils.INTENT_REGION_SCREENSHOT.equals(action)) {
+                mContext.enforceCallingOrSelfPermission(Manifest.permission.ACCESS_SURFACE_FLINGER,
+                        TAG + "sendCustomAction permission denied");
+                mHandler.removeCallbacks(mScreenshotRunnable);
+                mScreenshotRunnable.setScreenshotType(TAKE_SCREENSHOT_SELECTED_REGION);
+                mHandler.post(mScreenshotRunnable);
+            }
+        }
     }
 
     @Override
